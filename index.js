@@ -3,9 +3,9 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { authRouter } from "./routes/auth.js";
-import { hotelRouter } from "./routes/hotels.js";
+import { productRouter } from "./routes/products.js";
 import { userRouter } from "./routes/users.js";
-import { roomRouter } from "./routes/rooms.js";
+import { ordersRouter } from "./routes/orders.js";
 
 const app = express()
 dotenv.config()
@@ -13,9 +13,9 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/auth',authRouter)
-app.use('/hotels',hotelRouter)
+app.use('/products',productRouter)
 app.use('/users',userRouter)
-app.use('/rooms',roomRouter)
+app.use('/orders',ordersRouter)
 
 mongoose.connect(process.env.CONNECTION_URL,
     {

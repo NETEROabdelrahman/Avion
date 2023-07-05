@@ -3,6 +3,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import UserModel from "../models/UserModel.js";
 import auth from "../middleware/auth.js";
+import ProductsModel from "../models/ProductsModel.js";
+import mongoose from "mongoose";
 
 
 const router = express.Router();
@@ -13,12 +15,14 @@ const router = express.Router();
 router.get("/", auth, async (req, res) => {
     if (req.user.isAdmin) {
         try {
-            const users =await UserModel.find()
+            const users =await UserModel.find({}).select("_id phone isAdmin username email country city createdAt updatedAt")
             res.status(200).json(users)
         } catch (error) {
+          console.log(error)
             res.status(404).json(error)
         }
     } else {
+      
         res.status(403).json("You are not the admin");
     }
 })
@@ -28,7 +32,7 @@ router.get("/", auth, async (req, res) => {
 
 router.get("/:id", async (req, res) => {
     try {
-        const user =await UserModel.findById(req.params.id)
+        const user =await UserModel.findOne({_id:req.params.id}).select("_id phone isAdmin username email country city createdAt updatedAt")
         res.status(200).json(user)
     } catch (error) {
         res.status(404).json(error)
@@ -110,6 +114,8 @@ router.get("/find/stats", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
 
 
 
