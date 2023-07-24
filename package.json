@@ -4,10 +4,12 @@
   "description": "",
   "type": "module",
   "main": "index.js",
+  "engines":{
+    "node":"14.x"
+  },
   "scripts": {
     "dev": "nodemon index.js",
-    "build": "npm i",
-    "vercel-build":"echo hello"
+    "build": "npm i"
   },
   "author": "",
   "license": "ISC",
