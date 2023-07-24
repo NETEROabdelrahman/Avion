@@ -31,3 +31,5 @@ mongoose.connect(process.env.CONNECTION_URL,
 app.listen(PORT, () => {
     console.log('running server')
 })
+
+export default app
